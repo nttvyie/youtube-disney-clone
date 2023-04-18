@@ -1,9 +1,15 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <h1>Let's build the Disney clone</h1>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Login />}></Route>
+        </Routes>
+      </Router>
     </div>
   );
 }
