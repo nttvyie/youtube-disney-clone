@@ -1,18 +1,30 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import { useEffect } from "react";
 import styled from "styled-components";
 import { auth, provider } from "../firebase";
 import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
-  selectUserName,
   selectUserPhoto,
+  selectUserName,
   setUserLoginDetails,
 } from "../features/user/userSlice";
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  // const history = useNavigate();
+  const history = useNavigate();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        history.push("/home");
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userName]);
 
   const handleAuth = () => {
     auth
@@ -45,27 +57,27 @@ const Header = (props) => {
       ) : (
         <>
           <NavMenu>
-            <a href="/">
+            <a href="/home">
               <img src="/images/home-icon.svg" alt="HOME" />
               <span>HOME</span>
             </a>
-            <a href="/">
+            <a href="#">
               <img src="/images/search-icon.svg" alt="SEARCH" />
               <span>SEARCH</span>
             </a>
-            <a href="/">
+            <a href="#">
               <img src="/images/watchlist-icon.svg" alt="WATCHLIST" />
               <span>WATCHLIST</span>
             </a>
-            <a href="/">
+            <a href="#">
               <img src="/images/original-icon.svg" alt="ORIGINALS" />
               <span>ORIGINALS</span>
             </a>
-            <a href="/">
+            <a href="#">
               <img src="/images/movie-icon.svg" alt="MOVIES" />
               <span>MOVIES</span>
             </a>
-            <a href="/">
+            <a href="#">
               <img src="/images/series-icon.svg" alt="SERIES" />
               <span>SERIES</span>
             </a>
