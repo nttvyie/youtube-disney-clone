@@ -21,7 +21,7 @@ const Header = (props) => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         setUser(user);
-        history("/");
+        history("/home");
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
