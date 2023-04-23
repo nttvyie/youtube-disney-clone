@@ -21,6 +21,7 @@ const movieSlide = createSlice({
 });
 
 export const { setMovies } = movieSlide.actions;
+
 export const selectRecommend = (state) => state.movie.recommend;
 export const selectNewDisney = (state) => state.movie.newDisney;
 export const selectOriginal = (state) => state.movie.original;

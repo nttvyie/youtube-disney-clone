@@ -1,46 +1,25 @@
+/* eslint-disable array-callback-return */
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectRecommend } from "../features/movie/movieSlice";
 
 const Recommends = (props) => {
+  const movies = useSelector(selectRecommend);
+
   return (
     <Container>
       <h4>Recommended for You</h4>
       <Content>
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C5C0440D26A50B4B1FB275A545B24F9C49A77C721734169ABA4AE80E15348474/scale?width=1200&aspectRatio=1.78&format=jpeg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C5C0440D26A50B4B1FB275A545B24F9C49A77C721734169ABA4AE80E15348474/scale?width=1200&aspectRatio=1.78&format=jpeg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C5C0440D26A50B4B1FB275A545B24F9C49A77C721734169ABA4AE80E15348474/scale?width=1200&aspectRatio=1.78&format=jpeg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
-
-        <Wrap>
-          <Link to="/">
-            <img
-              src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/C5C0440D26A50B4B1FB275A545B24F9C49A77C721734169ABA4AE80E15348474/scale?width=1200&aspectRatio=1.78&format=jpeg"
-              alt=""
-            />
-          </Link>
-        </Wrap>
+        {movies &&
+          movies.map((movie, key) => (
+            <Wrap key={key}>
+              {movie.id}
+              <Link to={`detail/` + movie.id}>
+                <img src={movie.cardImg} alt={movie.title} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
   );
