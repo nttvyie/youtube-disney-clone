@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import db from "../firebase";
 import { setMovies } from "../features/movie/movieSlice";
-import { userSlice, selectUserName } from "../features/user/userSlice";
+import { /*userSlice,*/ selectUserName } from "../features/user/userSlice";
 
 import ImgSlider from "./ImgSlider";
 import Viewers from "./Viewers";
