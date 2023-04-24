@@ -10,12 +10,12 @@ const Detail = (props) => {
         />
       </Background>
 
-      <ImgTitle>
+      <ImageTitle>
         <img
           alt=""
           src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DDFF0FDF457E092EE53149CE7DB5BD14CB97E27B92D2D087E7C687B4E3073DE2/scale?width=1440&aspectRatio=1.78"
         />
-      </ImgTitle>
+      </ImageTitle>
 
       <ContentMeta>
         <Controls>
@@ -28,6 +28,11 @@ const Detail = (props) => {
             <img src="/images/play-icon-white.png" alt="" />
             <span>Trailer</span>
           </Trailer>
+
+          <AddList>
+            <span></span>
+            <span></span>
+          </AddList>
         </Controls>
       </ContentMeta>
     </Container>
@@ -61,7 +66,7 @@ const Background = styled.div`
   }
 `;
 
-const ImgTitle = styled.div`
+const ImageTitle = styled.div`
   align-items: flex-end;
   display: flex;
   -webkit-box-pack: start;
@@ -75,6 +80,7 @@ const ImgTitle = styled.div`
   img {
     max-width: 600px;
     min-width: 200px;
+    width: 35vw;
   }
 `;
 
@@ -131,6 +137,36 @@ const Trailer = styled(Player)`
   background: rgba(0, 0, 0, 0.3);
   border: 1px, solid, rgb(249, 249, 249);
   color: rgb(249, 249, 249);
+`;
+
+const AddList = styled.div`
+  margin-right: 16px;
+  height: 44px;
+  width: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  border: 2px solid white;
+  cursor: pointer;
+
+  span {
+    background-color: rgb(249, 249, 249);
+    display: inline-block;
+
+    &:first-child {
+      height: 2px;
+      transform: translate(1px, 0) rorate(0deg);
+      width: 16px;
+    }
+
+    &:nth-child(2) {
+      height: 16px;
+      transform: translateX(-8px) rotate(0deg);
+      width: 2px;
+    }
+  }
 `;
 
 export default Detail;
