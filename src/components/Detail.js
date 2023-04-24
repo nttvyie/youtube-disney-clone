@@ -1,20 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import db from "../firebase";
+
 const Detail = (props) => {
+  const { id } = useParams();
+  const [detailData, setDetailData] = useState({});
+
+  useEffect(() => {
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setDetailData(doc.data());
+        } else {
+          console.log("no such document in firebase");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting document: ", error);
+      });
+  }, [id]);
+
   return (
     <Container>
       <Background>
-        <img
-          alt=""
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/F6CDB6C0EB2D77EB19BCADA31F85066E001A1F61FA68F4AC3356A73FE076477F/scale?width=1440&aspectRatio=1.78&format=jpeg"
-        />
+        <img alt={detailData.title} src={detailData.backgroundImg} />
       </Background>
 
       <ImageTitle>
-        <img
-          alt=""
-          src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DDFF0FDF457E092EE53149CE7DB5BD14CB97E27B92D2D087E7C687B4E3073DE2/scale?width=1440&aspectRatio=1.78"
-        />
+        <img alt={detailData.title} src={detailData.titleImg} />
       </ImageTitle>
 
       <ContentMeta>
@@ -41,8 +59,8 @@ const Detail = (props) => {
           </GroupWatch>
         </Controls>
 
-        <SubTitle>SubTitle</SubTitle>
-        <Description>Description</Description>
+        <SubTitle>{detailData.subTitle}</SubTitle>
+        <Description>{detailData.description}</Description>
       </ContentMeta>
     </Container>
   );
@@ -211,7 +229,7 @@ const SubTitle = styled.div`
 `;
 
 const Description = styled.div`
-  line-height: 1.4px;
+  line-height: 1.4;
   font-size: 28px;
   padding: 16px 0;
   color: rgb(249, 249, 249);
